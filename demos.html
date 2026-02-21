@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Демки — MESSIAN</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="page-demos">
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="header__inner">
+            <a href="index.html" class="logo">
+                <span class="logo__name">MESSIAN</span>
+                <span class="logo__sub">composer · sound designer</span>
+            </a>
+            <a href="index.html" class="btn btn--outline">← На главную</a>
+        </div>
+    </header>
+
+    <!-- Заголовок -->
+    <section class="demos-hero">
+        <h1>Библиотека демок</h1>
+        <p>Нажмите на пластинку, чтобы послушать</p>
+        <p class="demos-hero__hint">← прокручивайте →</p>
+    </section>
+
+    <!-- Горизонтальная лента пластинок -->
+    <section class="vinyl-gallery">
+    <div class="vinyl-track">
+
+        <!-- Пластинка 1 -->
+        <div class="vinyl-item" data-audio="assets/audio/demo1.mp3">
+            <div class="vinyl-sleeve">
+                <img src="assets/images/album1.jpg" alt="Demo 1" class="vinyl-sleeve__img">
+            </div>
+            <div class="vinyl-disc">
+                <div class="vinyl-disc__grooves"></div>
+                <div class="vinyl-disc__label">
+                    <img src="assets/images/album1.jpg" alt="" class="vinyl-disc__label-img">
+                </div>
+                <div class="vinyl-disc__hole"></div>
+            </div>
+            <div class="vinyl-info">
+                <span class="vinyl-info__title">Demo Track #1</span>
+                <span class="vinyl-info__duration">3:24</span>
+                <p class="vinyl-info__desc">
+                    Оркестровая тема для короткометражного фильма. 
+                    Записана с использованием живых струнных и синтезаторных текстур. 
+                    Настроение — напряжение, ожидание, тревога.
+                </p>
+            </div>
+            <div class="vinyl-progress">
+                <div class="vinyl-progress__bar"></div>
+            </div>
+        </div>
+
+        <!-- Пластинка 2 -->
+        <div class="vinyl-item" data-audio="assets/audio/demo1.mp3">
+            <div class="vinyl-sleeve">
+                <img src="assets/images/album1.jpg" alt="Demo 2" class="vinyl-sleeve__img">
+            </div>
+            <div class="vinyl-disc">
+                <div class="vinyl-disc__grooves"></div>
+                <div class="vinyl-disc__label">
+                    <img src="assets/images/album1.jpg" alt="" class="vinyl-disc__label-img">
+                </div>
+                <div class="vinyl-disc__hole"></div>
+            </div>
+            <div class="vinyl-info">
+                <span class="vinyl-info__title">Demo Track #2</span>
+                <span class="vinyl-info__duration">2:58</span>
+                <p class="vinyl-info__desc">
+                    Электронный эмбиент-трек для документального проекта. 
+                    Слои полевых записей, гранулярный синтез и пространственная обработка. 
+                    Тема — одиночество в большом городе.
+                </p>
+            </div>
+            <div class="vinyl-progress">
+                <div class="vinyl-progress__bar"></div>
+            </div>
+        </div>
+
+        <!-- Пластинка 3 -->
+        <div class="vinyl-item" data-audio="assets/audio/demo1.mp3">
+            <div class="vinyl-sleeve">
+                <img src="assets/images/album1.jpg" alt="Demo 3" class="vinyl-sleeve__img">
+            </div>
+            <div class="vinyl-disc">
+                <div class="vinyl-disc__grooves"></div>
+                <div class="vinyl-disc__label">
+                    <img src="assets/images/album1.jpg" alt="" class="vinyl-disc__label-img">
+                </div>
+                <div class="vinyl-disc__hole"></div>
+            </div>
+            <div class="vinyl-info">
+                <span class="vinyl-info__title">Demo Track #3</span>
+                <span class="vinyl-info__duration">4:12</span>
+                <p class="vinyl-info__desc">
+                    Гибридный саундтрек — пианино, электроника и перкуссия. 
+                    Написан как главная тема для инди-игры. 
+                    Вдохновлено скандинавскими пейзажами и минимализмом.
+                </p>
+            </div>
+            <div class="vinyl-progress">
+                <div class="vinyl-progress__bar"></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+                 
+    <script src="js/script.js"></script>
+</body>
+</html>
