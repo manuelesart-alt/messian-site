@@ -871,12 +871,28 @@ img {
     }
 
     .header__actions {
-        gap: 10px;
+        gap: 8px;
     }
 
     .lang-switch span {
         padding: 5px 10px;
         font-size: 11px;
+    }
+
+    /* Кнопка «На главную» — только стрелка на мобильном */
+    .btn--outline[data-i18n="back-home"] {
+        font-size: 0;
+        padding: 8px 14px;
+        line-height: 1;
+    }
+    .btn--outline[data-i18n="back-home"]::before {
+        content: '←';
+        font-size: 16px;
+    }
+
+    /* Play/pause по центру уменьшенной пластинки */
+    .vinyl-item::after {
+        top: 82px;
     }
 
     .footer__contacts {
@@ -1181,29 +1197,9 @@ img {
     opacity: 0.3;
 }
 
-/* Кнопка fullscreen */
+/* Кнопка fullscreen — скрыта (браузер предоставляет свою) */
 .film-popup__fullscreen {
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    width: 44px;
-    height: 44px;
-    border: none;
-    background: rgba(0, 0, 0, 0.6);
-    color: var(--text-main);
-    font-size: 22px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-}
-
-.film-popup__fullscreen:hover {
-    background: var(--accent);
-    color: var(--bg-dark);
+    display: none;
 }
 
 /* --- Информация --- */
