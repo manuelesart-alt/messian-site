@@ -1,4 +1,114 @@
+/* ============================================
+   СИСТЕМА ЯЗЫКОВ (i18n)
+   ============================================ */
+const i18n = {
+    ru: {
+        'contacts': 'Контакты',
+        'back-home': '← На главную',
+        'portfolio': 'Портфолио',
+        'demos-card-title': 'Библиотека демок',
+        'demos-card-desc': 'Оригинальные композиции, саундтреки и эксперименты',
+        'demos-card-link': 'Слушать →',
+        'films-card-title': 'Библиотека фильмов',
+        'films-card-desc': 'Работы для кино, рекламы и медиа-проектов',
+        'films-card-link': 'Смотреть →',
+        'about-title': 'О себе',
+        'education-title': 'Образование',
+        'contact-title': 'Связаться со мной',
+        'copyright': '© 2025 MESSIAN. Все права защищены.',
+        'demos-hero-title': 'Библиотека демок',
+        'demos-hero-sub': 'Нажмите на пластинку, чтобы послушать',
+        'demos-hero-hint': '← прокручивайте →',
+        'films-hero-title': 'Библиотека фильмов',
+        'films-hero-sub': 'Музыка и звуковой дизайн для кино, рекламы и медиа',
+        'video-coming': 'Видео скоро появится',
+        'loading-video': 'Загрузка видео...',
+        'load-error': 'Не удалось загрузить видео',
+        'open-yadisk': 'Открыть на Яндекс Диске →',
+        'bad-gdrive': 'Неверная ссылка Google Drive',
+        'open-gdrive': 'Открыть в Google Drive →',
+    },
+    en: {
+        'contacts': 'Contacts',
+        'back-home': '← Back to home',
+        'portfolio': 'Portfolio',
+        'demos-card-title': 'Demo Library',
+        'demos-card-desc': 'Original compositions, soundtracks, and experiments',
+        'demos-card-link': 'Listen →',
+        'films-card-title': 'Film Library',
+        'films-card-desc': 'Works for cinema, advertising, and media projects',
+        'films-card-link': 'Watch →',
+        'about-title': 'About',
+        'education-title': 'Education',
+        'contact-title': 'Get in touch',
+        'copyright': '© 2025 MESSIAN. All rights reserved.',
+        'demos-hero-title': 'Demo Library',
+        'demos-hero-sub': 'Click on a vinyl to listen',
+        'demos-hero-hint': '← scroll →',
+        'films-hero-title': 'Film Library',
+        'films-hero-sub': 'Music and sound design for cinema, advertising, and media',
+        'video-coming': 'Video coming soon',
+        'loading-video': 'Loading video...',
+        'load-error': 'Failed to load video',
+        'open-yadisk': 'Open on Yandex Disk →',
+        'bad-gdrive': 'Invalid Google Drive link',
+        'open-gdrive': 'Open in Google Drive →',
+    }
+};
+
+function getCurrentLang() {
+    return localStorage.getItem('site-lang') || 'ru';
+}
+
+function t(key) {
+    const lang = getCurrentLang();
+    return (i18n[lang] && i18n[lang][key]) || key;
+}
+
+function setLanguage(lang) {
+    localStorage.setItem('site-lang', lang);
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang] && i18n[lang][key]) {
+            el.textContent = i18n[lang][key];
+        }
+    });
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+        if (!el.hasAttribute('data-ru')) {
+            el.setAttribute('data-ru', el.textContent);
+        }
+        el.textContent = lang === 'en'
+            ? el.getAttribute('data-en')
+            : el.getAttribute('data-ru');
+    });
+
+    document.querySelectorAll('.lang-switch').forEach(sw => {
+        sw.querySelector('.lang-switch__ru').classList.toggle('active', lang === 'ru');
+        sw.querySelector('.lang-switch__en').classList.toggle('active', lang === 'en');
+    });
+
+    // Update film card hover categories when language changes
+    document.querySelectorAll('.film-card').forEach(card => {
+        const catEl = card.querySelector('.film-card__category');
+        if (catEl) {
+            const en = lang === 'en';
+            catEl.textContent = (en && card.getAttribute('data-category-en')) || card.getAttribute('data-category');
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Language initialization
+    setLanguage(getCurrentLang());
+    document.querySelectorAll('.lang-switch').forEach(sw => {
+        sw.addEventListener('click', () => {
+            setLanguage(getCurrentLang() === 'ru' ? 'en' : 'ru');
+        });
+    });
 
     /* ============================================
        ВИНИЛОВЫЙ ПЛЕЕР
@@ -192,12 +302,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return match ? match[1] : null;
         }
 
-        // Показать загрузку
         function showLoading() {
             playerContainer.innerHTML = `
                 <div class="film-popup__no-video">
                     <span class="film-popup__no-video-icon">⏳</span>
-                    <span>Загрузка видео...</span>
+                    <span>${t('loading-video')}</span>
                 </div>
             `;
         }
@@ -250,9 +359,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     playerContainer.innerHTML = `
                         <div class="film-popup__no-video">
                             <span class="film-popup__no-video-icon">⚠</span>
-                            <span>Не удалось загрузить видео</span>
+                            <span>${t('load-error')}</span>
                             <a href="${publicUrl}" target="_blank" style="color: var(--accent); font-size: 14px; margin-top: 8px;">
-                                Открыть на Яндекс Диске →
+                                ${t('open-yadisk')}
                             </a>
                         </div>
                     `;
@@ -299,16 +408,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             allow="autoplay; fullscreen"
                             allowfullscreen>
                         </iframe>
-                        <button class="film-popup__fullscreen" id="fullscreenBtn" title="На весь экран">⛶</button>
                     `;
-                    attachFullscreen();
+                    filmPopup.classList.add('gdrive');
                 } else {
                     playerContainer.innerHTML = `
                         <div class="film-popup__no-video">
                             <span class="film-popup__no-video-icon">⚠</span>
-                            <span>Неверная ссылка Google Drive</span>
+                            <span>${t('bad-gdrive')}</span>
                             <a href="${videoUrl}" target="_blank" style="color: var(--accent); font-size: 14px; margin-top: 8px;">
-                                Открыть в Google Drive →
+                                ${t('open-gdrive')}
                             </a>
                         </div>
                     `;
@@ -321,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 playerContainer.innerHTML = `
                     <div class="film-popup__no-video">
                         <span class="film-popup__no-video-icon">🎬</span>
-                        <span>Видео скоро появится</span>
+                        <span>${t('video-coming')}</span>
                     </div>
                 `;
             }
@@ -340,11 +448,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Открыть попап
         filmCards.forEach(card => {
             card.addEventListener('click', () => {
-                popupTitle.textContent = card.getAttribute('data-title');
+                const en = getCurrentLang() === 'en';
+                popupTitle.textContent = (en && card.getAttribute('data-title-en')) || card.getAttribute('data-title');
                 popupYear.textContent = card.getAttribute('data-year');
-                popupCategory.textContent = card.getAttribute('data-category');
-                popupRole.textContent = card.getAttribute('data-role');
-                popupDesc.textContent = card.getAttribute('data-desc');
+                popupCategory.textContent = (en && card.getAttribute('data-category-en')) || card.getAttribute('data-category');
+                popupRole.textContent = (en && card.getAttribute('data-role-en')) || card.getAttribute('data-role');
+                popupDesc.textContent = (en && card.getAttribute('data-desc-en')) || card.getAttribute('data-desc');
 
                 buildPlayer(card.getAttribute('data-video'));
 
@@ -356,6 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Закрыть попап
         function closeFilmPopup() {
             filmPopup.classList.remove('active');
+            filmPopup.classList.remove('gdrive');
             clearPlayer();
             document.body.style.overflow = '';
         }

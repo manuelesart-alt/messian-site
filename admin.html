@@ -376,6 +376,14 @@
             </div>
         </div>
 
+        <div class="divider"></div>
+        <h3 style="font-size: 14px; color: var(--accent); margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase;">🌐 English version</h3>
+
+        <div class="form-group">
+            <label>Track Description (EN)</label>
+            <textarea id="demoDescEn" placeholder="Description of style, instruments, mood..."></textarea>
+        </div>
+
         <button class="btn-generate" onclick="generateDemo()">Сгенерировать код</button>
 
         <!-- Превью -->
@@ -464,6 +472,37 @@
             </div>
         </div>
 
+        <div class="divider"></div>
+        <h3 style="font-size: 14px; color: var(--accent); margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase;">🌐 English version</h3>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Category (EN)</label>
+                <select id="filmCategoryEn">
+                    <option value="">— Not specified —</option>
+                    <option value="Short Film">Short Film</option>
+                    <option value="Feature Film">Feature Film</option>
+                    <option value="Documentary">Documentary</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Music Video">Music Video</option>
+                    <option value="Animation">Animation</option>
+                    <option value="TV Series">TV Series</option>
+                    <option value="Game">Game</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Your Role (EN)</label>
+                <input type="text" id="filmRoleEn" placeholder="Composer, Sound Designer">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Project Description (EN)</label>
+            <textarea id="filmDescEn" placeholder="Tell about the project, your role, instruments..."></textarea>
+        </div>
+
+        <div class="divider"></div>
+
         <div class="info-box" style="background: rgba(201, 169, 110, 0.08); border-color: rgba(201, 169, 110, 0.2);">
             <strong style="color: var(--accent);">Поддерживаемые форматы видео:</strong><br>
             • Vimeo — <code>https://vimeo.com/123456789</code><br>
@@ -516,15 +555,14 @@
             в файле <strong>index.html</strong>
         </div>
 
-        <div class="form-row">
-            <div class="form-group">
-                <label>Имя</label>
-                <input type="text" id="aboutName" placeholder="Имя Фамилия">
-            </div>
-            <div class="form-group">
-                <label>Роль / специализация</label>
-                <input type="text" id="aboutRole" placeholder="Композитор · Саунд-дизайнер">
-            </div>
+        <div class="form-group">
+            <label>Имя и фамилия</label>
+            <input type="text" id="aboutName" placeholder="Имя Фамилия">
+        </div>
+
+        <div class="form-group">
+            <label>Роль / специализация</label>
+            <input type="text" id="aboutRole" placeholder="Композитор · Саунд-дизайнер">
         </div>
 
         <div class="form-group">
@@ -541,7 +579,7 @@
         <h3 style="font-size: 14px; color: var(--muted); margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase;">Образование (до 5 записей)</h3>
 
         <div id="eduList">
-            <div class="form-row edu-row">
+            <div class="form-row-3 edu-row">
                 <div class="form-group">
                     <label>Годы</label>
                     <input type="text" class="edu-year" placeholder="2018 — 2022">
@@ -550,10 +588,32 @@
                     <label>Учебное заведение / курс</label>
                     <input type="text" class="edu-place" placeholder="Консерватория — композиция">
                 </div>
+                <div class="form-group">
+                    <label>Institution (EN)</label>
+                    <input type="text" class="edu-place-en" placeholder="Conservatory — Composition">
+                </div>
             </div>
         </div>
 
         <button class="btn-copy" onclick="addEduRow()" style="margin-bottom: 20px;">+ Добавить строку</button>
+
+        <div class="divider"></div>
+        <h3 style="font-size: 14px; color: var(--accent); margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase;">🌐 English version</h3>
+
+        <div class="form-group">
+            <label>Full Name (EN)</label>
+            <input type="text" id="aboutNameEn" placeholder="First Last Name">
+        </div>
+
+        <div class="form-group">
+            <label>Role / Specialization (EN)</label>
+            <input type="text" id="aboutRoleEn" placeholder="Composer · Sound Designer">
+        </div>
+
+        <div class="form-group">
+            <label>Biography (EN)</label>
+            <textarea id="aboutBioEn" placeholder="Tell about yourself..."></textarea>
+        </div>
 
         <br>
         <button class="btn-generate" onclick="generateAbout()">Сгенерировать код</button>
@@ -664,6 +724,8 @@
         const desc = document.getElementById('demoDesc').value || 'Описание трека.';
         const cover = document.getElementById('demoCover').value || 'assets/images/album1.jpg';
         const audio = document.getElementById('demoAudio').value || 'assets/audio/demo.mp3';
+        const descEn = document.getElementById('demoDescEn').value;
+        const descEnAttr = descEn ? ` data-en="${descEn}"` : '';
 
         const code = `<!-- ${title} -->
 <div class="vinyl-item" data-audio="${audio}">
@@ -680,7 +742,7 @@
     <div class="vinyl-info">
         <span class="vinyl-info__title">${title}</span>
         <span class="vinyl-info__duration">${duration}</span>
-        <p class="vinyl-info__desc">${desc}</p>
+        <p class="vinyl-info__desc"${descEnAttr}>${desc}</p>
     </div>
     <div class="vinyl-progress">
         <div class="vinyl-progress__bar"></div>
@@ -706,6 +768,15 @@
         const desc = document.getElementById('filmDesc').value || 'Описание проекта.';
         const poster = document.getElementById('filmPoster').value || 'assets/images/film1.jpg';
         const video = document.getElementById('filmVideo').value || '';
+        const categoryEn = document.getElementById('filmCategoryEn').value;
+        const roleEn = document.getElementById('filmRoleEn').value;
+        const descEn = document.getElementById('filmDescEn').value;
+
+        let enAttrs = '';
+        if (categoryEn) enAttrs += `\n         data-category-en="${categoryEn}"`;
+        if (roleEn) enAttrs += `\n         data-role-en="${roleEn}"`;
+        if (descEn) enAttrs += `\n         data-desc-en="${descEn}"`;
+        const catEnAttr = categoryEn ? ` data-en="${categoryEn}"` : '';
 
         const code = `<!-- ${title} -->
 <article class="film-card"
@@ -713,13 +784,13 @@
          data-year="${year}"
          data-category="${category}"
          data-role="${role}"
-         data-desc="${desc}"
+         data-desc="${desc}"${enAttrs}
          data-video="${video}">
     <div class="film-card__poster">
         <img src="${poster}" alt="${title}">
         <div class="film-card__hover">
             <div class="film-card__play-icon">▶</div>
-            <span class="film-card__category">${category}</span>
+            <span class="film-card__category"${catEnAttr}>${category}</span>
         </div>
     </div>
     <div class="film-card__info">
@@ -743,7 +814,7 @@
     function addEduRow() {
         const list = document.getElementById('eduList');
         const row = document.createElement('div');
-        row.className = 'form-row edu-row';
+        row.className = 'form-row-3 edu-row';
         row.innerHTML = `
             <div class="form-group">
                 <label>Годы</label>
@@ -752,6 +823,10 @@
             <div class="form-group">
                 <label>Учебное заведение / курс</label>
                 <input type="text" class="edu-place" placeholder="Название — специальность">
+            </div>
+            <div class="form-group">
+                <label>Institution (EN)</label>
+                <input type="text" class="edu-place-en" placeholder="Name — Specialization">
             </div>
         `;
         list.appendChild(row);
@@ -762,15 +837,20 @@
         const role = document.getElementById('aboutRole').value || 'Композитор · Саунд-дизайнер';
         const photo = document.getElementById('aboutPhoto').value || '';
         const bio = document.getElementById('aboutBio').value || 'Описание.';
+        const nameEn = document.getElementById('aboutNameEn').value;
+        const roleEn = document.getElementById('aboutRoleEn').value;
+        const bioEn = document.getElementById('aboutBioEn').value;
 
         const years = document.querySelectorAll('.edu-year');
         const places = document.querySelectorAll('.edu-place');
+        const placesEn = document.querySelectorAll('.edu-place-en');
         let eduHtml = '';
         years.forEach((y, i) => {
             if (y.value && places[i].value) {
+                const enAttr = (placesEn[i] && placesEn[i].value) ? ` data-en="${placesEn[i].value}"` : '';
                 eduHtml += `                            <li>
                                 <span class="year">${y.value}</span>
-                                <span class="place">${places[i].value}</span>
+                                <span class="place"${enAttr}>${places[i].value}</span>
                             </li>\n`;
             }
         });
@@ -779,22 +859,26 @@
             ? `<img src="${photo}" alt="${name}" class="about__photo-img">`
             : `<div class="about__photo-placeholder">${name.charAt(0)}</div>`;
 
+        const nameEnAttr = nameEn ? ` data-en="${nameEn}"` : '';
+        const roleEnAttr = roleEn ? ` data-en="${roleEn}"` : '';
+        const bioEnAttr = bioEn ? ` data-en="${bioEn}"` : '';
+
         const code = `<section class="about">
     <div class="about__inner">
-        <h2 class="section-title">О себе</h2>
+        <h2 class="section-title" data-i18n="about-title">О себе</h2>
         <div class="about__content">
             <div class="about__photo">
                 ${photoBlock}
             </div>
             <div class="about__text">
-                <h3>${name}</h3>
-                <p class="about__role">${role}</p>
+                <h3${nameEnAttr}>${name}</h3>
+                <p class="about__role"${roleEnAttr}>${role}</p>
                 <div class="about__education">
-                    <h4>Образование</h4>
+                    <h4 data-i18n="education-title">Образование</h4>
                     <ul>
 ${eduHtml}                    </ul>
                 </div>
-                <p class="about__bio">${bio}</p>
+                <p class="about__bio"${bioEnAttr}>${bio}</p>
             </div>
         </div>
     </div>
@@ -841,10 +925,10 @@ ${eduHtml}                    </ul>
 
         const code = `<footer id="contacts" class="footer">
     <div class="footer__inner">
-        <h2 class="section-title section-title--light">Связаться со мной</h2>
+        <h2 class="section-title section-title--light" data-i18n="contact-title">Связаться со мной</h2>
         <div class="footer__contacts">
 ${links}        </div>
-        <p class="footer__copy">© 2025 MESSIAN. Все права защищены.</p>
+        <p class="footer__copy" data-i18n="copyright">© 2025 MESSIAN. Все права защищены.</p>
     </div>
 </footer>`;
 

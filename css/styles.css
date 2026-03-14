@@ -73,6 +73,45 @@ img {
 }
 
 /* ============================================
+   ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА
+   ============================================ */
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.lang-switch {
+    display: flex;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.lang-switch span {
+    padding: 7px 14px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.lang-switch span.active {
+    background: var(--accent);
+    color: var(--bg-dark);
+}
+
+.lang-switch:hover {
+    border-color: var(--accent);
+}
+
+/* ============================================
    ШАПКА
    ============================================ */
 .header {
@@ -831,6 +870,15 @@ img {
         height: 200px;
     }
 
+    .header__actions {
+        gap: 10px;
+    }
+
+    .lang-switch span {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+
     .footer__contacts {
         flex-direction: column;
         align-items: center;
@@ -1039,13 +1087,13 @@ img {
 /* Кнопка закрыть */
 .film-popup__close {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 12px;
+    right: 12px;
     width: 40px;
     height: 40px;
     border: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-main);
+    background: var(--accent);
+    color: var(--bg-dark);
     font-size: 0;
     border-radius: 50%;
     cursor: pointer;
@@ -1056,6 +1104,15 @@ img {
     justify-content: center;
     padding: 0;
     line-height: 1;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.film-popup.gdrive .film-popup__close {
+    top: 12px;
+    right: 12px;
+    background: var(--accent);
+    width: 44px;
+    height: 44px;
 }
 
 .film-popup__close::before,
@@ -1064,7 +1121,7 @@ img {
     position: absolute;
     width: 18px;
     height: 2px;
-    background: var(--text-main);
+    background: var(--bg-dark);
     border-radius: 2px;
     transition: background 0.3s ease;
 }
@@ -1077,14 +1134,9 @@ img {
     transform: rotate(-45deg);
 }
 
-.film-popup__close:hover::before,
-.film-popup__close:hover::after {
-    background: var(--bg-dark);
-}
-
 .film-popup__close:hover {
-    background: var(--accent);
-    color: var(--bg-dark);
+    background: var(--text-main);
+    transform: scale(1.1);
 }
 
 /* --- Видеоплеер --- */
@@ -1228,6 +1280,13 @@ img {
 
     .film-popup__window {
         width: 95%;
+    }
+
+    .film-popup__close {
+        top: 8px;
+        right: 8px;
+        width: 36px;
+        height: 36px;
     }
 
     .film-popup__info {

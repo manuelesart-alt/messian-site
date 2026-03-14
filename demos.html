@@ -17,15 +17,21 @@
                 <span class="logo__name">MESSIAN</span>
                 <span class="logo__sub">composer · sound designer</span>
             </a>
-            <a href="index.html" class="btn btn--outline">← На главную</a>
+            <div class="header__actions">
+                <button class="lang-switch" aria-label="Switch language">
+                    <span class="lang-switch__ru active">RU</span>
+                    <span class="lang-switch__en">EN</span>
+                </button>
+                <a href="index.html" class="btn btn--outline" data-i18n="back-home">← На главную</a>
+            </div>
         </div>
     </header>
 
     <!-- Заголовок -->
     <section class="demos-hero">
-        <h1>Библиотека демок</h1>
-        <p>Нажмите на пластинку, чтобы послушать</p>
-        <p class="demos-hero__hint">← прокручивайте →</p>
+        <h1 data-i18n="demos-hero-title">Библиотека демок</h1>
+        <p data-i18n="demos-hero-sub">Нажмите на пластинку, чтобы послушать</p>
+        <p class="demos-hero__hint" data-i18n="demos-hero-hint">← прокручивайте →</p>
     </section>
 
     <!-- Горизонтальная лента пластинок -->
@@ -47,7 +53,7 @@
             <div class="vinyl-info">
                 <span class="vinyl-info__title">Demo Track #1</span>
                 <span class="vinyl-info__duration">3:24</span>
-                <p class="vinyl-info__desc">
+                <p class="vinyl-info__desc" data-en="Orchestral theme for a short film. Recorded with live strings and synthesizer textures. Mood — tension, anticipation, anxiety.">
                     Оркестровая тема для короткометражного фильма. 
                     Записана с использованием живых струнных и синтезаторных текстур. 
                     Настроение — напряжение, ожидание, тревога.
@@ -73,7 +79,7 @@
             <div class="vinyl-info">
                 <span class="vinyl-info__title">Demo Track #2</span>
                 <span class="vinyl-info__duration">2:58</span>
-                <p class="vinyl-info__desc">
+                <p class="vinyl-info__desc" data-en="Electronic ambient track for a documentary project. Layers of field recordings, granular synthesis, and spatial processing. Theme — solitude in a big city.">
                     Электронный эмбиент-трек для документального проекта. 
                     Слои полевых записей, гранулярный синтез и пространственная обработка. 
                     Тема — одиночество в большом городе.
@@ -99,7 +105,7 @@
             <div class="vinyl-info">
                 <span class="vinyl-info__title">Demo Track #3</span>
                 <span class="vinyl-info__duration">4:12</span>
-                <p class="vinyl-info__desc">
+                <p class="vinyl-info__desc" data-en="Hybrid soundtrack — piano, electronics, and percussion. Written as the main theme for an indie game. Inspired by Scandinavian landscapes and minimalism.">
                     Гибридный саундтрек — пианино, электроника и перкуссия. 
                     Написан как главная тема для инди-игры. 
                     Вдохновлено скандинавскими пейзажами и минимализмом.
